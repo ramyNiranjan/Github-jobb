@@ -1,5 +1,3 @@
-import React, { useContext } from "react";
-import { GithubContext } from "./context/githubJobProvider";
 import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import JobbItem from "./pages/JobbItem";
