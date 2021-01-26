@@ -15,9 +15,6 @@ export const manipulateUserValue = (searchValue) => {
     : searchValue.trim().replace(" ", "+").toLowerCase();
 };
 
-// export const findResult = (arr, search) => {
-//   return arr.filter((item) => item[search]);
-// };
 export const findResult = (arr, search) => {
   return arr.reduce((acc, curr) => {
     if (curr[search]) {

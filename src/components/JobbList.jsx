@@ -15,13 +15,8 @@ export default function JobbList() {
   const { data, isLoading, isError } = fetchJobs();
 
   const checkingSearch = () => {
-    // setSearchValue(searchValue);
-    console.log(Boolean(searchValue));
-    console.log(searchValue);
-    console.log(ctxData);
     return searchValue ? findResult(ctxData, searchValue) : data;
   };
-  console.log(findResult(ctxData, searchValue));
 
   return (
     <SimpleGrid minChildWidth="250px" spacing="20px" mx="4" mb="4">
@@ -34,7 +29,7 @@ export default function JobbList() {
       )}
       {!ctxIsError &&
         !ctxIsLoading &&
-        !ctxData &&
+        searchValue &&
         findResult(ctxData, searchValue).length === 0 && (
           <Info message="Nothing found" />
         )}

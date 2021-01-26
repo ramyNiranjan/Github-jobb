@@ -10,9 +10,9 @@ export default function Search() {
 
   const checkPreviousValue = () => {
     const inputValue = inputRef.current.value.trim();
-    if (ctxData.find((o) => !o.hasOwnProperty(""))) {
-      setSearchValue(inputValue);
-    }
+    // if (ctxData.every((o) => !o.hasOwnProperty([inputValue]))) {
+    //   setSearchValue(inputValue);
+    // }
     setSearchValue(inputValue);
   };
 
