@@ -1,5 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import React, { useContext, useEffect,useState } from "react";
+import React, { useContext } from "react";
 import { GithubContext } from "../context/githubJobProvider";
 import { fetchJobs } from "../utils/fetchFromGH";
 import JobCard from "./JobbCard";
@@ -14,8 +14,6 @@ export default function JobbList() {
     ctxIsError,
     searchValue,
     savedValue,
-       disSearch,
-        disSaved
   } = useContext(GithubContext);
 
   const { data, isLoading, isError } = fetchJobs();
