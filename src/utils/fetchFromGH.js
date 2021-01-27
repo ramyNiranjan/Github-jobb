@@ -50,9 +50,9 @@ export const useFetch = (searchValue) => {
         const result = await axios(URL);
 
         setData((prev) => {
-          if (prev.find((item) => item.hasOwnProperty([searchValue]))) {
-            return prev;
-          }
+          // if (prev.find((item) => item.hasOwnProperty([searchValue]))) {
+          //   return prev;
+          // }
           return [...prev, { [searchValue]: result.data }];
         });
       } catch (error) {

@@ -1,19 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Flex, Input } from "@chakra-ui/react";
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef,useEffect } from "react";
 import { GithubContext } from "../context/githubJobProvider";
+// import { findResult } from "../utils/helper";
 
 export default function Search() {
-  const { setSearchValue, ctxData } = useContext(GithubContext);
+  const { setSearchValue, ctxData, setSavedValue } = useContext(GithubContext);
 
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    checkPreviousValue()
+  }, [ctxData,setSavedValue,setSearchValue])
+
+
   const checkPreviousValue = () => {
     const inputValue = inputRef.current.value.trim();
-    // if (ctxData.every((o) => !o.hasOwnProperty([inputValue]))) {
-    //   setSearchValue(inputValue);
-    // }
-    setSearchValue(inputValue);
+    if (ctxData.every((o) => !o.hasOwnProperty([inputValue]))) {
+      setSearchValue(inputValue);
+    } else {
+      setSavedValue(inputValue);
+    }
   };
 
   return (

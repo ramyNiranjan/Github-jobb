@@ -16,9 +16,12 @@ export const manipulateUserValue = (searchValue) => {
 };
 
 export const findResult = (arr, search) => {
+  console.log('testing search value',search)
   return arr.reduce((acc, curr) => {
     if (curr[search]) {
       acc = curr[search];
+    }else{
+      console.log(search)
     }
     return acc;
   }, []);
