@@ -1,30 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Flex, Input } from "@chakra-ui/react";
-import React, { useContext, useRef,useEffect } from "react";
+import React, { useContext, useRef } from "react";
 import { GithubContext } from "../context/githubJobProvider";
-// import { findResult } from "../utils/helper";
 
 export default function Search() {
   const { setSearchValue, ctxData, setSavedValue } = useContext(GithubContext);
 
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    checkPreviousValue()
-  }, [ctxData,setSavedValue,setSearchValue])
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-
-  const checkPreviousValue = () => {
-    const inputValue = inputRef.current.value.trim();
-    if (ctxData.every((o) => !o.hasOwnProperty([inputValue]))) {
-      setSearchValue(inputValue);
+    const typedValue = inputRef.current.value.trim();
+    if (!ctxData.find((o) => o.hasOwnProperty([typedValue]))) {
+      setSearchValue(typedValue);
+      setSavedValue("");
     } else {
-      setSavedValue(inputValue);
+      setSavedValue(typedValue);
     }
   };
 
   return (
-    <Flex p="4" justify="center" align="center" w="100%" h="100px">
+    <Flex
+      onSubmit={onSubmit}
+      as="form"
+      p="4"
+      justify="center"
+      align="center"
+      w="100%"
+      h="100px"
+    >
       <Input
         focusBorderColor="teal.100"
         borderRadius="sm"
@@ -33,9 +38,10 @@ export default function Search() {
         size="sm"
         mr="2"
         type="text"
+        name="search"
         ref={inputRef}
       />
-      <Button colorScheme="teal" size="sm" onClick={checkPreviousValue}>
+      <Button colorScheme="teal" size="sm" type="submit">
         Search
       </Button>
     </Flex>

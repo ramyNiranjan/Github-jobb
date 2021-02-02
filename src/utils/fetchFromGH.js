@@ -16,14 +16,6 @@ export function fetchJobs() {
     isError: error,
   };
 }
-export function searchByDes(search) {
-  const { data, error } = useSWR(`${BASE_URL}?description=${search}`, fetcher);
-  return {
-    data: data || [],
-    isLoading: !error && !data,
-    isError: error,
-  };
-}
 
 export function fetchJobById(id) {
   const { data, error } = useSWR(`${BASE_URL}?id=${id} `, fetcher);
@@ -34,10 +26,8 @@ export function fetchJobById(id) {
   };
 }
 
-export const useFetch = (searchValue) => {
-  const URL = `https://us-central1-wands-2017.cloudfunctions.net/githubjobs?description=${manipulateUserValue(
-    searchValue
-  )}`;
+export const useFetch = (searchValue, ctx = []) => {
+  const URL = `${BASE_URL}?description=${manipulateUserValue(searchValue)}`;
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -50,9 +40,6 @@ export const useFetch = (searchValue) => {
         const result = await axios(URL);
 
         setData((prev) => {
-          // if (prev.find((item) => item.hasOwnProperty([searchValue]))) {
-          //   return prev;
-          // }
           return [...prev, { [searchValue]: result.data }];
         });
       } catch (error) {
